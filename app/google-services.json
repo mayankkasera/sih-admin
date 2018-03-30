@@ -1,0 +1,107 @@
+{
+  "project_info": {
+    "project_number": "714537948769",
+    "firebase_url": "https://sih2018-6a62b.firebaseio.com",
+    "project_id": "sih2018-6a62b",
+    "storage_bucket": "sih2018-6a62b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:714537948769:android:cd7f0910b904cc26",
+        "android_client_info": {
+          "package_name": "bytewalker.sihadmin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "714537948769-lqr8o4tkt9e84b3fjmi3ojo6bq5mrh7b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "bytewalker.sihadmin",
+            "certificate_hash": "bedb5aa8d2b254b3317e008913640e103089fe5b"
+          }
+        },
+        {
+          "client_id": "714537948769-os4eqenskisg56200ilho99tbmquq49q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "bytewalker.sihadmin",
+            "certificate_hash": "ece97f1fd78102976c4b8c9ea1708a4bdae964b6"
+          }
+        },
+        {
+          "client_id": "714537948769-pq6d4l1lhnfhiu0fstgqvk8p9tcpr8q4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0hLa_P-E1lUtGZZaioWqPmGpPzzerJa4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "714537948769-pq6d4l1lhnfhiu0fstgqvk8p9tcpr8q4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:714537948769:android:9668a17932e6f429",
+        "android_client_info": {
+          "package_name": "bytewalker.sihuser"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "714537948769-tamrfov9rf42kn35nvgjr2eglhngrsnu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "bytewalker.sihuser",
+            "certificate_hash": "bedb5aa8d2b254b3317e008913640e103089fe5b"
+          }
+        },
+        {
+          "client_id": "714537948769-pq6d4l1lhnfhiu0fstgqvk8p9tcpr8q4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0hLa_P-E1lUtGZZaioWqPmGpPzzerJa4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "714537948769-pq6d4l1lhnfhiu0fstgqvk8p9tcpr8q4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
