@@ -128,21 +128,22 @@ public class DashboardActivity extends AppCompatActivity {
                 AdminList.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent ;
-//                        if(Type.equals("admin")){
-//                            intent = new Intent(DashboardActivity.this,StateAdminsActivity.class);
-//                        }
-//                        else  if(Type.equals("state_admin"))
-//                            intent = new Intent(DashboardActivity.this,DistrictAdminsActivity.class);
-//                        else if(Type.equals("district_admin"))
-//                            intent = new  Intent(DashboardActivity.this,RegionsAdminActivity.class);
-//                        else
-//                            intent = new  Intent(DashboardActivity.this,AuthorityAdminActivity.class);
-//
+                        Intent intent = null;
+                        if(Type.equals("admin")){
+
+                           intent = new Intent(DashboardActivity.this,StateAdminsActivity.class);
+                        }
+                        else  if(Type.equals("state_admin"))
+                            intent = new Intent(DashboardActivity.this,DistrictAdminsActivity.class);
+                        else if(Type.equals("district_admin"))
+                            intent = new  Intent(DashboardActivity.this,RegionsAdminActivity.class);
+                        else
+                            intent = new  Intent(DashboardActivity.this,AuthorityAdminActivity.class);
 
 
-//                        intent.putExtra("type",Type);
-//                        startActivity(intent);
+
+                        intent.putExtra("type",Type);
+                        startActivity(intent);
                         dialog.dismiss();
                     }
                 });
@@ -155,7 +156,13 @@ public class DashboardActivity extends AppCompatActivity {
 
 
 
-
+        CardComplaint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(getBaseContext(),MainActivity.class));
+            }
+        });
 
         Toast.makeText(this, sharedPreferences.getString("email",null)+" "+sharedPreferences.getString("password",null), Toast.LENGTH_SHORT).show();
 

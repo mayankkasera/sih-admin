@@ -16,6 +16,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.geofire.GeoFire;
+import com.firebase.geofire.GeoLocation;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
@@ -32,6 +34,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
+
+import dmax.dialog.SpotsDialog;
 
 public class AdminsRegistrationActivity extends AppCompatActivity {
 
@@ -50,6 +54,8 @@ public class AdminsRegistrationActivity extends AppCompatActivity {
     private String User_Type = SharedpreferenceHelper.getInstance(this).getType();
     private int PLACE_PICKER_REQUEST = 1;
     private Double Lat,Long;
+    SpotsDialog spotsDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +102,8 @@ public class AdminsRegistrationActivity extends AppCompatActivity {
             public void onClick(View view) {
 
 
+                spotsDialog = new SpotsDialog(AdminsRegistrationActivity.this);
+                spotsDialog.show();
                 registerAdmins();
 
             }
@@ -153,7 +161,7 @@ public class AdminsRegistrationActivity extends AppCompatActivity {
                                             Toast.LENGTH_SHORT).show();
 
                                     //setting person detail
-                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    final FirebaseUser user = mAuth.getCurrentUser();
                                     if(Type.equals("admin")) {
                                         myRef = database.getReference().child("state_admin").child(user.getUid());                                    }
                                     else if(Type.equals("state_admin"))
@@ -172,7 +180,7 @@ public class AdminsRegistrationActivity extends AppCompatActivity {
                                     userInfo1.put("email",Email.getEditText().getText().toString());
                                     userInfo1.put("gender",Gender_s);
                                     userInfo1.put("mobileno",MobileNo.getEditText().getText().toString());
-                                    userInfo1.put("image","default");
+                                    userInfo1.put("image","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRG8pC7HNbKwoDhAjQA5PDM1EGWBSBb-jWTX6eRd0rqRzYoDalG");
 
                                     if(Type.equals("admin")){
                                         userInfo1.put("state",State.getEditText().getText().toString());
@@ -196,11 +204,25 @@ public class AdminsRegistrationActivity extends AppCompatActivity {
                                         userInfo1.put("authority",Authority.getEditText().getText().toString());
                                     }
 
+
+
                                     myRef.setValue(userInfo1).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             Toast.makeText(AdminsRegistrationActivity.this, "register....info ...state",
                                                     Toast.LENGTH_SHORT).show();
+
+                                            if(Type.equals("district_admin")){
+                                                DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
+                                                        .child("region_places").child(SharedpreferenceHelper.getInstance(getApplicationContext()).getState())
+                                                        .child(SharedpreferenceHelper.getInstance(getApplicationContext()).getDistrict());
+
+
+                                                GeoFire geoFire = new GeoFire(reference);
+                                                geoFire.setLocation(user.getUid().toString(),new GeoLocation(Lat,Long));
+                                            }
+
+
 
                                         }
                                     });
@@ -214,7 +236,8 @@ public class AdminsRegistrationActivity extends AppCompatActivity {
                                     Toast.makeText(AdminsRegistrationActivity.this,sharedPreferences.getString("email",null)+sharedPreferences.getString("password",null), Toast.LENGTH_SHORT).show();
                                     fun(sharedPreferences.getString("email",null),sharedPreferences.getString("password",null));
 
-
+                              // startActivity(new Intent(getBaseContext(),MainActivity.class));
+                               spotsDialog.dismiss();
                                 }
                             });
 
@@ -222,7 +245,7 @@ public class AdminsRegistrationActivity extends AppCompatActivity {
 
 
                         } else {
-
+                            spotsDialog.dismiss();
                             // If sign in fails, display a message to the user.
                             Toast.makeText(AdminsRegistrationActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
@@ -238,6 +261,9 @@ public class AdminsRegistrationActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         database = FirebaseDatabase.getInstance();
+
+        spotsDialog = new SpotsDialog(this);
+        spotsDialog.show();
 
         DatabaseReference refType = database.getReference().child("Management_Users").child(user.getUid());
 
@@ -282,12 +308,12 @@ public class AdminsRegistrationActivity extends AppCompatActivity {
 
 
 
-
+                spotsDialog.dismiss();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                spotsDialog.show();
             }
         });
 
